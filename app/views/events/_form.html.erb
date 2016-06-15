@@ -24,5 +24,9 @@
 
     <div class="actions buffer-bottom">
       <%= f.submit 'Сохранить', class: 'btn btn-primary' %> или <%= link_to 'вернуться', :back %>
+      <% if @event.id? %>
+      <%= link_to 'Удалить мероприятие', event_path(@event), class: 'btn btn-danger', style: 'float: right',
+                  method: :delete, data: {confirm: 'Точно удалить мероприятие?'} %>
+      <% end %>
     </div>
 <% end %>
