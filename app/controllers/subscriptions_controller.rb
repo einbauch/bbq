@@ -14,11 +14,6 @@ class SubscriptionsController < ApplicationController
     @new_subscription = @event.subscriptions.build(subscription_params)
     @new_subscription.user = current_user
 
-    if @new_subscription.email_taken?
-      redirect_to @event, alert: I18n.t('controllers.subscription.email_error')
-      return
-    end
-
     if @new_subscription.save
       # если сохранилась успешно, редирект на страницу самого события
       redirect_to @event, notice: I18n.t('controllers.subscription.created')
