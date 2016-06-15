@@ -63,7 +63,7 @@
         </div>
       </div>
 
-      <% unless current_user_can_edit?(@event) %>
+      <% if current_user_can_subscribe_to?(@event) %>
       <div class="event-subscription-form">
         <h4>Я пойду:</h4>
         <div>
