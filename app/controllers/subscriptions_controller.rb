@@ -14,7 +14,10 @@ class SubscriptionsController < ApplicationController
     @new_subscription = @event.subscriptions.build(subscription_params)
     @new_subscription.user = current_user
 
-    if @new_subscription.save
+    if email_taken?
+      flash[:alert] = I18n.t('controllers.subscription.email_error')
+      render 'events/show'
+    elsif @new_subscription.save
       # если сохранилась успешно, редирект на страницу самого события
       redirect_to @event, notice: I18n.t('controllers.subscription.created')
     else
@@ -47,5 +50,14 @@ class SubscriptionsController < ApplicationController
   def subscription_params
     # .fetch разрешает в params отсутствие ключа :subscription
     params.fetch(:subscription, {}).permit(:user_email, :user_name)
+  end
+
+
+  def email_taken?
+    if user_signed_in?
+      false
+    else
+      User.where(email: @new_subscription.user_email).count != 0
+    end
   end
 end

@@ -24,8 +24,4 @@ class Subscription < ActiveRecord::Base
     end
   end
 
-  def email_taken?
-    User.where(email: user_email).count != 0
-  end
-
 end
