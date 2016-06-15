@@ -5,13 +5,14 @@
     <div class="col-md-12">
       <%= content_tag 'div', '',
                       class: 'event-background',
-                      style: "background-image: url(#{asset_path('event.jpg')})"
-      %>
+                      style: "background-image: url(#{asset_path('event.jpg')})" %>
 
       <div class="event-info-inner row">
         <div class="col-md-6">
           <div class="event-description">
             <h1><%= @event.title %></h1>
+            <%# Для перевода времени в русский формат используем I18n %>
+            <%# Формат при этом используется из гема russian %>
             <h3><%= l @event.datetime, format: :long %></h3>
             <h3>
               <small>
@@ -22,7 +23,6 @@
           </div>
 
           <% if current_user_can_edit?(@event) %>
-
               <div class="buffer-both">
                 <%= link_to 'Изменить', edit_event_path(@event), class: 'btn btn-primary' %>
                 <%= link_to 'Удалить мероприятие', event_path(@event), class: 'btn btn-danger',
@@ -34,5 +34,44 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="event-comments buffer-top">
+
+        <%= render partial: 'comments/form', locals: {comment: @new_comment || @event.comments.build} %>
+
+        <div class="buffer-both">
+          <%= render partial: 'comments/comment', collection: @event.comments.except(@new_comment) %>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="event-owner">
+        <h4>Зовет:</h4>
+        <p><%= render partial: 'users/user', object: @event.user %></p>
+      </div>
+      <div class="event-subscriptions">
+        <h4>Пойдут:</h4>
+        <div>
+          <p>
+            <%= render(
+                    partial: 'subscriptions/subscription',
+                    collection: @event.subscriptions.except(@new_subscription)
+                ) %>
+          </p>
+        </div>
+      </div>
+      <div class="event-subscription-form">
+        <h4>Я пойду:</h4>
+        <div>
+          <%= render partial: 'subscriptions/form', locals: {subscription: @new_subscription || @event.subscriptions.build} %>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 </div>

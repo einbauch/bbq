@@ -1,6 +1,14 @@
+# (с) goodprogrammer.ru
+#
+# Контроллер, управляющий событиями
 class EventsController < ApplicationController
+  # встроенный в девайз фильтр - посылает незалогиненного пользователя
   before_action :authenticate_user!, except: [:show, :index]
+
+  # задаем объект @event для экшена show
   before_action :set_event, only: [:show]
+
+  # задаем объект @event от текущего юзера
   before_action :set_current_user_event, only: [:edit, :update, :destroy]
 
   # GET /events
@@ -10,6 +18,8 @@ class EventsController < ApplicationController
 
   # GET /events/1
   def show
+    @new_comment = @event.comments.build(params[:comment])
+    @new_subscription = @event.subscriptions.build(params[:subscription])
   end
 
   # GET /events/new
@@ -26,6 +36,8 @@ class EventsController < ApplicationController
     @event = current_user.events.build(event_params)
 
     if @event.save
+      # Используем сообщение из файла локалей ru.yml
+      # controllers -> events -> created
       redirect_to @event, notice: I18n.t('controllers.events.created')
     else
       render :new
@@ -48,17 +60,15 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
-
   def set_current_user_event
     @event = current_user.events.find(params[:id])
   end
 
-    # Only allow a trusted parameter "white list" through.
-    def event_params
-      params.require(:event).permit(:title, :address, :datetime, :description)
-    end
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  def event_params
+    params.require(:event).permit(:title, :address, :datetime, :description)
+  end
 end

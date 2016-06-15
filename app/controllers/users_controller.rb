@@ -1,5 +1,11 @@
+# (с) goodprogrammer.ru
+#
+# Контроллер, управляющий событиями
 class UsersController < ApplicationController
+  # встроенный в девайз фильтр - посылает незалогиненного пользователя
   before_action :authenticate_user!, except: [:show]
+
+  # задаем объект @user для шаблонов и экшенов
   before_action :set_current_user, except: [:show]
 
   # GET /users/1
@@ -21,15 +27,13 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
 
   def set_current_user
     @user = current_user
   end
 
-    # Only allow a trusted parameter "white list" through.
+  # Only allow a trusted parameter "white list" through.
   def user_params
     params.require(:user).permit(:name, :email)
   end
-
 end
