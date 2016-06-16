@@ -3,6 +3,9 @@ ru:
     models:
       user: 'Пользователь'
       event: 'Событие'
+      photo: 'Фото'
+      comment: 'Комментарий'
+      subscribtion: 'Подписка'
     attributes:
       user:
         email: 'Email'
@@ -15,6 +18,11 @@ ru:
         address: 'Место проведения'
         datetime: 'Дата и время'
         description: 'Описание'
+      photo:
+        photo: 'Фото'
+      comment:
+        user_name: 'Ваше имя'
+        body: 'Комментарий'
   controllers:
     events:
       created: 'Вы создали мероприятие'
@@ -48,3 +56,7 @@ ru:
   comments:
     comment:
       destroy_confirm: 'Вы уверены, что хотите удалить этот комментарий?'
+
+  errors:
+    messages:
+      extension_white_list_error: 'Недопустимый формат! Разрешенные форматы файлов: JPG, PNG, GIF'
