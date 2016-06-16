@@ -14,16 +14,13 @@ class SubscriptionsController < ApplicationController
     @new_subscription = @event.subscriptions.build(subscription_params)
     @new_subscription.user = current_user
 
-    if email_taken?
-      flash[:alert] = I18n.t('controllers.subscription.email_error')
-      render 'events/show'
-    elsif @new_subscription.save
+    if @new_subscription.save
       # если сохранилась успешно, то отравляем уведомление и редирект на страницу самого события
       EventMailer.subscription(@event, @new_subscription).deliver_now
       redirect_to @event, notice: I18n.t('controllers.subscription.created')
     else
       # если ошибки — рендерим здесь же шаблон события
-      flash[:alert] = I18n.t('controllers.subscription.error')
+      flash.now[:alert] = I18n.t('controllers.subscription.error')
       render 'events/show'
     end
   end
@@ -54,12 +51,4 @@ class SubscriptionsController < ApplicationController
     params.fetch(:subscription, {}).permit(:user_email, :user_name)
   end
 
-
-  def email_taken?
-    if user_signed_in?
-      false
-    else
-      User.where(email: @new_subscription.user_email).exists?
-    end
-  end
 end

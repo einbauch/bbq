@@ -12,7 +12,7 @@ class PhotosController < ApplicationController
 
       redirect_to @event, notice: I18n.t('controllers.photos.created')
     else
-      flash[:alert] = I18n.t('controllers.photos.error')
+      flash.now[:alert] = I18n.t('controllers.photos.error')
       render 'events/show'
     end
   end

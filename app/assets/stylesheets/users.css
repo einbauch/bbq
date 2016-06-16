@@ -1,3 +1,8 @@
+.user-avatar {
+    width: 300px;
+    height: auto;
+}
+
 .user-avatar .img-icon {
     margin-top: -2px;
     height: 20px;
