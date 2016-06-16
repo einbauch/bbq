@@ -1,5 +1,9 @@
 <h1><%= t '.title' %></h1>
-<p> <%= @photo.photo %></p>
+<p>
+  <a href="<%= @photo.photo %>">
+    <img src="<%= @photo.photo.thumb %>" alt="Photo">
+  </a>
+</p>
 <p> <%= t '.author' %>: <strong><%= @photo.user.name %></strong></p>
 
 <hr/>
