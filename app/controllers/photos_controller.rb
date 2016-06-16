@@ -51,7 +51,7 @@ class PhotosController < ApplicationController
     # XXX: Этот метод может выполняться долго из-за большого числа подписчиков
     # поэтому в реальных приложениях такие вещи надо выносить в background задачи!
     all_emails.each do |mail|
-      EventMailer.comment(event, photo, mail).deliver_now
+      EventMailer.photo(event, photo, mail).deliver_now
     end
   end
 
