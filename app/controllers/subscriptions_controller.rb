@@ -18,12 +18,13 @@ class SubscriptionsController < ApplicationController
       flash[:alert] = I18n.t('controllers.subscription.email_error')
       render 'events/show'
     elsif @new_subscription.save
+      # если сохранилась успешно, то отравляем уведомление и редирект на страницу самого события
       EventMailer.subscription(@event, @new_subscription).deliver_now
-      # если сохранилась успешно, редирект на страницу самого события
       redirect_to @event, notice: I18n.t('controllers.subscription.created')
     else
       # если ошибки — рендерим здесь же шаблон события
-      render 'events/show', alert: I18n.t('controllers.subscription.error')
+      flash[:alert] = I18n.t('controllers.subscription.error')
+      render 'events/show'
     end
   end
 
@@ -58,7 +59,7 @@ class SubscriptionsController < ApplicationController
     if user_signed_in?
       false
     else
-      User.where(email: @new_subscription.user_email).count != 0
+      User.where(email: @new_subscription.user_email).exists?
     end
   end
 end

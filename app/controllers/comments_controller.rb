@@ -18,7 +18,8 @@ class CommentsController < ApplicationController
       redirect_to @event, notice: I18n.t('controllers.comments.created')
     else
       # если ошибки — рендерим здесь же шаблон события
-      render 'events/show', alert: I18n.t('controllers.comments.error')
+      flash[:alert] = I18n.t('controllers.comments.error')
+      render 'events/show'
     end
   end
 
