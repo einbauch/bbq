@@ -35,6 +35,17 @@
 
   <div class="row">
     <div class="col-md-8">
+      <div class="event-photos">
+        <%# Выводим все фотографии события %>
+        <div class="event-photos-gallery">
+          <%= render partial: 'photos/photo', collection: @event.photos.except(@new_photo) %>
+        </div>
+
+        <%# Рисуем форму для добавления новой фотографии %>
+        <div class="event-photo-form">
+          <%= render partial: 'photos/form', locals: {photo: @new_photo || @event.photos.build} %>
+        </div>
+      </div>
       <div class="event-comments buffer-top">
 
         <%= render partial: 'comments/form', locals: {comment: @new_comment || @event.comments.build} %>
