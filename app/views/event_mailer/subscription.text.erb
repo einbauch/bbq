@@ -1,0 +1,11 @@
+<h1><%= t '.title' %></h1>
+____
+
+<%= t '.name' %>: <%= @name %>
+<%= t '.email' %>: <%= @email %>
+
+_____________________
+
+<%= t '.event' %>: <%= @event.title %>
+<%= t '.datetime' %>: <%= l @event.datetime %>
+<%= t '.owner' %>: <%= @event.user.name %>

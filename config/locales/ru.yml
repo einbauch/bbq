@@ -18,6 +18,9 @@ ru:
         address: 'Место проведения'
         datetime: 'Дата и время'
         description: 'Описание'
+      subscription:
+        user_name: 'Ваше имя'
+        user_email: 'Ваш email'
       photo:
         photo: 'Фото'
       comment:
@@ -60,3 +63,19 @@ ru:
   errors:
     messages:
       extension_white_list_error: 'Недопустимый формат! Разрешенные форматы файлов: JPG, PNG, GIF'
+
+  event_mailer:
+    comment:
+      title: 'Новый комментарий'
+      author: 'Автор'
+      event: 'Событие'
+      datetime: 'Состоится'
+      owner: 'Организатор'
+    subscription:
+      title: 'Новая подписка'
+      name: 'Имя'
+      email: 'Email'
+      author: 'Автор'
+      event: 'Событие'
+      datetime: 'Состоится'
+      owner: 'Организатор'

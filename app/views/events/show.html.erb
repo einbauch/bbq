@@ -42,9 +42,11 @@
         </div>
 
         <%# Рисуем форму для добавления новой фотографии %>
-        <div class="event-photo-form">
-          <%= render partial: 'photos/form', locals: {photo: @new_photo || @event.photos.build} %>
-        </div>
+        <% if user_signed_in? %>
+          <div class="event-photo-form">
+            <%= render partial: 'photos/form', locals: {photo: @new_photo || @event.photos.build} %>
+          </div>
+        <% end %>
       </div>
       <div class="event-comments buffer-top">
 
