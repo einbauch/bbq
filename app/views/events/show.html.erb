@@ -45,6 +45,11 @@
           <%= render partial: 'photos/photo', collection: @event.photos.except(@new_photo) %>
         </div>
 
+        <%# Кнопка вывода формы добавления фотографии %>
+        <div class="buffer-both">
+          <%= link_to "Добавить фотку", '#', class: 'event-photo-form-link' %>
+        </div>
+
         <%# Рисуем форму для добавления новой фотографии %>
         <% if user_signed_in? %>
           <div class="event-photo-form">
@@ -52,13 +57,18 @@
           </div>
         <% end %>
       </div>
-      <div class="event-comments buffer-top">
 
+      <%# Кнопка вывода формы добавления комментария %>
+      <div class="buffer-both">
+        <%= link_to "Добавить комментарий", '#', class: 'event-comment-form-link' %>
+      </div>
+
+      <div class="event-comment-form">
         <%= render partial: 'comments/form', locals: {comment: @new_comment || @event.comments.build} %>
+      </div>
 
-        <div class="buffer-both">
-          <%= render partial: 'comments/comment', collection: @event.comments.except(@new_comment) %>
-        </div>
+      <div class="event-comments buffer-both">
+        <%= render partial: 'comments/comment', collection: @event.comments.except(@new_comment) %>
       </div>
     </div>
 

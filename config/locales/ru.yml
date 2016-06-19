@@ -32,6 +32,7 @@ ru:
       created: 'Вы создали мероприятие'
       updated: 'Вы обновили мероприятие'
       destroyed: 'Вы удалили мероприятие :('
+      wrong_pincode: 'Неверный пин-код!'
     users:
       updated: 'Вы обновили свой профиль'
     comments:
@@ -86,3 +87,7 @@ ru:
       event: 'Событие'
       datetime: 'Состоится'
       owner: 'Организатор'
+
+  photos:
+      photo:
+        destroy_confirm: 'Вы уверены, что хотите удалить эту фотографию?'
