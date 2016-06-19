@@ -18,6 +18,7 @@ ru:
         address: 'Место проведения'
         datetime: 'Дата и время'
         description: 'Описание'
+        pincode: 'Пин-код'
       subscription:
         user_name: 'Ваше имя'
         user_email: 'Ваш email'
