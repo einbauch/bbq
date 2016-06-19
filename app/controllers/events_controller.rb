@@ -11,7 +11,7 @@ class EventsController < ApplicationController
   # задаем объект @event от текущего юзера
   before_action :set_current_user_event, only: [:edit, :update, :destroy]
 
-  before_action :pincode_guard, only: [:show]
+  before_action :pincode_guard!, only: [:show]
 
   # GET /events
   def index
@@ -64,7 +64,7 @@ class EventsController < ApplicationController
 
   private
 
-  def pincode_guard
+  def pincode_guard!
     return if @event.pincode.blank?
     return if user_signed_in? && current_user == @event.user
 
