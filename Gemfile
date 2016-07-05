@@ -5,6 +5,10 @@ gem 'rails', '~> 4.2.6'
 gem 'devise'
 gem 'devise-i18n'
 gem 'russian'
+gem 'therubyracer'
+
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 gem 'twitter-bootstrap-rails'
 
